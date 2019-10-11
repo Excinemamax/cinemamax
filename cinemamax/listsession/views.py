@@ -1,5 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.db import models
+from maindb.models import Sessions
 
 def index(request):
-        return HttpResponse("Hellow cinema")
+        ses=Sessions.objects.all()
+        return HttpResponse(ses[0].fillname)
