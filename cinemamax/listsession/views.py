@@ -5,4 +5,4 @@ from maindb.models import Sessions
 
 def index(request):
         ses=Sessions.objects.all()
-        return HttpResponse(ses[0].fillname)
+        return render(request,"seslist/index.html",{"ses_lst":Sessions.objects.all()})
