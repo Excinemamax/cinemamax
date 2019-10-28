@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block head %}
+<title>Главная</title>
+<meta name="description" content="Главная страница блога"/>
+<meta name="keywords" content="блог"/>
+{% endblock %}
+ 
+{% block main %}
+  <h1>Главная</h1>
+  <h3>Темы:</h3>
+ 
+	{% for ses in ses_lst %}
+		<p>
+			<strong>
+				<a href="/Sessions/{{ ses.id }}/">
+					{{ses.fillname}}
+				</a>
+			</strong>
+		</p>
+	{% empty %}
+		<p>Пока нет тем</p>	
+	{% endfor %}
+{% endblock %}

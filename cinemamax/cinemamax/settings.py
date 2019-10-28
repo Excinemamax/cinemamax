@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 	'listsession',
 	'maindb',
+	'accounts',
+	'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -52,11 +54,12 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'cinemamax.urls'
-
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+LOGIN_REDIRECT_URL =  '/'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR,'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

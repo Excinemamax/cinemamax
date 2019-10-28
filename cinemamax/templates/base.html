@@ -1,0 +1,26 @@
+<!doctype  html>
+<html  lang="en">
+<head>
+<link  rel="stylesheet"  href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"  integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"  crossorigin="anonymous">
+<title>Django Authentication Example</title>
+</head>
+<body>
+  <div  class="container">
+    <div  class="row justify-content-center">
+      <div  class="col-4">
+      <h1  class="text-center">Django Authentication Example</h1>
+      {% block main %}
+	  <div class="saitbar">
+		<ul class="menu-3">
+		   <li><a href="listsession">Список фильмов</a></li>
+		   <li><a href="#">Второй пункт меню</a></li>
+		   <li><a href="#">Третий пункт меню</a></li>
+		   <li><a href="#">Четвёртый пункт меню</a></li>
+		</ul>
+	</div>
+      {% endblock %}
+      </div>
+    </div>
+  </div>
+</body>
+</html>
