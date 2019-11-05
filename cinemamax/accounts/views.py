@@ -1,16 +1,18 @@
-from django.shortcuts import render, redirect
-from django.contrib.auth.forms import UserCreationForm
+from .forms import UserRegistrationForm
+from django.shortcuts import render
 
 def signup(request):
-  if request.method == 'POST':
-    form = UserCreationForm(request.POST)
-    if form.is_valid():
-      form.save()
-    username = form.cleaned_data.get('username')
-    my_password = form.cleaned_data.get('password1')
-    user = authenticate(username=username, password=my_password)
-    login(request, user)
-    return redirect('seslist/index')
-  else:
-    form = UserCreationForm()
-    return render(request, 'registration/signup.html', {'form': form})
+    if request.method == 'POST':
+        user_form = UserRegistrationForm(request.POST)
+        if user_form.is_valid():
+            # Create a new user object but avoid saving it yet
+            new_user = user_form.save(commit=False)
+            # Set the chosen password
+            new_user.set_password(user_form.cleaned_data['password'])
+            # Save the User object
+            new_user.save()
+            return render(request, 'registration/register_done.html', {'new_user': new_user})
+    else:
+        user_form = UserRegistrationForm()
+    return render(request, 'registration/signup.html', {'user_form': user_form})
+

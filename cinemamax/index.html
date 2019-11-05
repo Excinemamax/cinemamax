@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>TinySlider - JavaScript Slideshow</title>
+<link rel="stylesheet" type="text/css" href="styleshet02.css" />
+<script type="text/javascript" src="jscript.js"></script>
+</head>
+<body>
+<div id="wrapper">
+	<div id="container">
+		<div class="sliderbutton" id="slideleft" onclick="slideshow.move(-1)"></div>
+		<div id="slider">
+			<ul>
+				<li><img src="photos/1.jpg" width="558" height="235" alt="Первое фото" /></li>
+				<li><img src="photos/2.jpg" width="558" height="235" alt="Второе фото" /></li>
+				<li><img src="photos/3.jpg" width="558" height="235" alt="Третье фото" /></li>
+				<li><img src="photos/4.jpg" width="558" height="235" alt="Четвертое фото" /></li>
+				<li><img src="photos/5.jpg" width="558" height="235" alt="Пятое фото" /></li>
+				<li><img src="photos/6.jpg" width="558" height="235" alt="Шестое фото" /></li>
+				<li><img src="photos/7.jpg" width="558" height="235" alt="Седьмое фото" /></li>
+			</ul>
+		</div>
+		<div class="sliderbutton" id="slideright" onclick="slideshow.move(1)"></div>
+		<ul id="pagination" class="pagination">
+			<li onclick="slideshow.pos(0)"></li>
+			<li onclick="slideshow.pos(1)"></li>
+			<li onclick="slideshow.pos(2)"></li>
+			<li onclick="slideshow.pos(3)"></li>
+			<li onclick="slideshow.pos(4)"></li>
+			<li onclick="slideshow.pos(5)"></li>
+			<li onclick="slideshow.pos(6)"></li>
+		</ul>
+	</div>
+</div>
+<script type="text/javascript">
+var slideshow=new TINY.slider.slide('slideshow',{
+	id:'slider',
+	auto:4,
+	resume:false,
+	vertical:false,
+	navid:'pagination',
+	activeclass:'current',
+	position:0,
+	rewind:false,
+	elastic:true,
+	left:'slideleft',
+	right:'slideright'
+});
+</script>
+</body>
+</html>
