@@ -133,6 +133,7 @@ class DjangoSession(models.Model):
 class Film(models.Model):
     namefilm = models.CharField(primary_key=True, max_length=20)
     description = models.TextField(blank=True, null=True)
+    imgurl = models.TextField(blank=True, null=True)
 
     class Meta:
         managed = False

@@ -1,0 +1,27 @@
+<!doctype  html>
+<html  lang="en">
+<head>
+<title>Cinemamax</title>
+{% load static %}
+ <link href="{% static 'css/style.css' %}" rel="stylesheet">
+</head>
+<body>
+  {% block main %}
+  <div  class="container">
+    <div  class="row justify-content-center">
+      <div  class="col-4">
+      <h1  class="text-center">Cinemamax</h1>
+	  <div class="saitbar">
+		<ul class="menu-3">
+		   <li><a href="listsession/3">Список фильмов</a></li>
+		   <li><a href="accounts/signup">Регистрация</a></li>
+		   <li><a href="accounts/login">Вход</a></li>
+		   <li><a href="accounts/logout">Выход</a></li>
+		</ul>
+	</div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+</body>
+</html>

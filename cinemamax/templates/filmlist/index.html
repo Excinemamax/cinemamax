@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block head %}
+{% load static %}
+<title>Список фильмов на неделю</title>
+<link href="{% static 'css/style.css' %}" rel="stylesheet">
+{% endblock %}
+ 
+{% block main %}
+  <h1>Афиша фильмов на неделю</h1>
+  {% if not film_lst %}
+	  <b>Фильмы не найдены</b>
+	  {% else %}
+		{% for film in film_lst %}
+			<a href="/listfilms/{{ film.namefilm }}"><b>{{film.namefilm}}</b></a>
+			<img src="{{ film.imgurl}}"  alt="Image">
+			<p>{{ film.description|truncatechars:70 }}</p>
+			<br><br><br>
+		{% endfor %}
+	{% endif %}
+{% endblock %}
