@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block head %}
+{% load static %}
+<title>Расписание</title>
+<link href="{% static 'css/style.css' %}" rel="stylesheet">
+{% endblock %}
+ 
+{% block main %}
+  <h1>Распсиание сеансов</h1>
+  {% if not listses %}
+	  <b>Сеансов нету</b>
+	  {% else %}
+		{% for ses in listses %}
+			{% with ses|first as first_doc %}
+				<a href="/listfilms/{{ first_doc.first.fillname.namefilm }}"><b>{{first_doc.fillname.namefilm}}</b></a>
+				<br><br>
+			{% endwith %}
+			{% for one in ses %}
+					<a href="/listsession/{{ one.numberhall.idhall }}/{{ one.idsession}}"><b>{{one.datasession }}</b></a>
+					<br>
+			{% endfor %}
+			<br><br><br>
+		{% endfor %}
+	{% endif %}
+{% endblock %}

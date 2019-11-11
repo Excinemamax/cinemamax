@@ -182,6 +182,7 @@ class Sessions(models.Model):
     idsession = models.IntegerField(primary_key=True)
     fillname = models.ForeignKey(Film, models.DO_NOTHING, db_column='fillname', blank=True, null=True)
     datasession = models.DateTimeField(blank=True, null=True)
+    numberhall = models.ForeignKey(Hall, models.DO_NOTHING, db_column='numberhall', blank=True, null=True)
 
     class Meta:
         managed = False

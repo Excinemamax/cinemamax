@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        .cinemaHall {
+  text-align: center;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.seat {
+  height: 40px;
+  width: 40px;
+  margin: 4px;
+  background-color: #999999;
+  display: inline-block;
+  cursor: pointer;
+  border-radius: 2px;
+  font-size: 12px;
+}
+
+.passageBetween {
+  height: 1px;
+  width: 100%;
+  display: block;
+}
+
+.bay {
+  background-color: red;
+}
+
+.result {
+  font-size: 10px;
+  display: inline-block;
+  width: 90px;
+  max-height: 200px;
+  overflow-y: auto;
+  margin-right: 5px;
+}
+    </style>
+    <script src="/scripts/snippet-javascript-console.min.js?v=1"></script>
+</head>
+<body>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+<body>
+  <div class='result'>
+  </div>
+  <div class='cinemaHall zal1'></div>
+
+</body>
+    <script type="text/javascript">
+        // план зала по рядам общая вместительность 300 мест
+// планов может быть и больше... и разные...
+var cinemaHall1 = {
+  row: [5, 7, 9, 9, 9]
+};
+var cinemaHallMap = '';
+// перебираем все ряды
+for (var i = 0; i < cinemaHall1.row.length; i++) {
+  // запомнили номер ряда
+  var rowNumber = i + 1;
+  // сколько мест в этом ряду
+  var numberOfSeats = cinemaHall1.row[i];
+  var cinemaHallRow = '';
+  // перебираем места в ряду
+  for (var j = 0; j < numberOfSeats; j++) {
+    // запомнили номер текущего места
+    var seatNumber = j + 1;
+    cinemaHallRow += '<div class="seat" data-row="' +
+      rowNumber + '" data-seat="' +
+      seatNumber + '">' + seatNumber + '</div>';
+  }
+  cinemaHallMap += cinemaHallRow + '<div class="passageBetween">&nbsp;</div>';
+}
+
+//заполняем в html зал номер 1
+$('.zal1').html(cinemaHallMap);
+// тут по клику определяем что место выкуплено
+$('.seat').on('click', function(e) {
+  // если первый раз кликнули билет выкупили, 
+  // если повторно значит вернули билет
+  $(e.currentTarget).toggleClass('bay');
+  //показываем сколько билетов выкуплено
+  showBaySeat();
+});
+
+function showBaySeat() {
+  result = '';
+  //ищем все места купленные и показываем список выкупленных мест
+  $.each($('.seat.bay'), function(key, item) {
+    result += '<div class="ticket">Ряд: ' +
+      $(item).data().row + ' Место:' +
+      $(item).data().seat + '</div>';
+  });
+
+  $('.result').html(result);
+}
+    </script>
+</body>
+</html>

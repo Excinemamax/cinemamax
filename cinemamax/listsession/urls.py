@@ -5,5 +5,7 @@ from . import views
 app_name = 'listsession'
 
 urlpatterns = [
-	path('<int:productid>/', views.index),
+	#url(r'^$', views.index, name='index'),
+	path('', views.index),
+	path('<int:idzal>/<int:numses>/', views.printzal),
 	]
