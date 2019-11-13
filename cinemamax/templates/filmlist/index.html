@@ -1,9 +1,14 @@
-{% extends 'base.html' %}
-{% block head %}
+{% extends 'menu.html' %}
 {% load static %}
 <title>Список фильмов на неделю</title>
-<link href="{% static 'css/style.css' %}" rel="stylesheet">
-{% endblock %}
+<style>
+#imgo {
+    width: 400px;
+    height: auto;
+    display: block;
+}
+
+</style>
  
 {% block main %}
   <h1>Афиша фильмов на неделю</h1>
@@ -12,7 +17,7 @@
 	  {% else %}
 		{% for film in film_lst %}
 			<a href="/listfilms/{{ film.namefilm }}"><b>{{film.namefilm}}</b></a>
-			<img src="{{ film.imgurl}}"  alt="Image">
+			<img id="imgo" src="{{ film.imgurl}}"  alt="Image">
 			<p>{{ film.description|truncatechars:70 }}</p>
 			<br><br><br>
 		{% endfor %}

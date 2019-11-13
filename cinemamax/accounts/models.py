@@ -6,5 +6,5 @@ from django.dispatch import receiver
 
 class Profile(models.Model):
   user = models.OneToOneField(User, on_delete=models.CASCADE)
-  card = models.BigIntegerField(blank=False)
+  card = models.BigIntegerField(blank=True,null=True)
   phone = models.CharField(max_length=11, blank=True)

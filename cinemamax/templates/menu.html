@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<head>
+{% load staticfiles %}
+<link rel="stylesheet" href="http://bootstraptema.ru/plugins/2015/bootstrap3/bootstrap.min.css" />
+<script src="http://bootstraptema.ru/plugins/jquery/jquery-1.11.3.min.js"></script>
+<script src="http://bootstraptema.ru/plugins/2016/easing/jquery.easing.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="http://bootstraptema.ru/snippets/effect/2016/snow/snowfall.jquery.js"></script>
+ {% block head %}
+ {% endblock %}
+<link href="{% static 'css/menu.css' %}" rel="stylesheet">
+</head>
+<body style="background-image:url( https://www.tokkoro.com/picsup/5777706-denim-wallpapers.jpg)">
+<div class="menu"> 
+ <a href="#" id="activator"><img src="http://bootstraptema.ru/snippets/menu/2016/button/menu.png" alt="" /></a>
+ <div class="box" id="box">
+ <div class="box_content">
+ <div class="menu_box_list">
+ <ul>
+ <li class="active"><a href="/">Главная</a></li>
+ <li><a href="/listfilms">Афиша</a></li>
+ <li><a href="/listsession">Расписание</a></li>
+ <li><a href="#">Контакты</a></li>
+ <div class="clearfix"></div>
+ </ul>
+ </div>
+ </div> 
+ </div>
+ <div class="container-fluid">
+</div>
+<br><br>
+ {% block main %}
+ {% endblock %}
+ <script>
+ var $ = jQuery.noConflict();
+ $(function() {
+ $('#activator').click(function(){
+ $('#box').animate({'top':'0px'},500);
+ });
+ $('#boxclose').click(function(){
+ $('#box').animate({'top':'-700px'},500);
+ });
+ });
+ $(document).ready(function(){
+$(document).snowfall({deviceorientation : true, round : true, shadow : false, minSpeed : 1, maxSpeed : 9, minSize: 1, maxSize:9, flakeCount : 244});
+});
+</script>
+</body>
+</html>

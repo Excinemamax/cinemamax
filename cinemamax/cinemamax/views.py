@@ -8,6 +8,11 @@ from django.conf.urls.static import static
 
 def index(request):
     if request.method == "POST":
+        typetick=request.POST.get("type")
+        if(typetick==1):
+            typetick=True
+        else:
+            typetick=False
         sid=Buyticket.objects.last().buyid+1
         un=request.user.username
         uid=Users.objects.get(uname=un).user_id
@@ -22,11 +27,10 @@ def index(request):
         lastuser.user_id=uid
         listtick=[]
         listtick= request.POST.get("listticketbuy").split(",")
-        print("POST")
         for i in range(len(listtick)-1):
                 sed=Seats.objects.get(hallid=zal,num=listtick[i]).idseats
                 lastseat.idseats=sed
-                ticket=Buyticket(buyid=sid,sessionid=lasttick,seatid=lastseat,userid=lastuser,isbuy=True)
+                ticket=Buyticket(buyid=sid,sessionid=lasttick,seatid=lastseat,userid=lastuser,isbuy=typetick)
                 ticket.save()
                 sid+=1
     if request.user.is_authenticated:

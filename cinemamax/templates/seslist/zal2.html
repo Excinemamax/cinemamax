@@ -1,18 +1,51 @@
 <!DOCTYPE html>
+{% extends 'menu.html' %}
 <html>
 <head>
+{% block head %}
     <style>
         .cinemaHall {
   text-align: center;
   display: inline-block;
   vertical-align: top;
 }
-
+#idbuy {
+	float:middle; width:35%; margin-left:1%;
+    top: 290px; 
+    left: 80px;
+	position: fixed;
+   }
+   #idreserv {
+	float:middle; width:35%; margin-left:1%;
+    top: 330px; 
+    left: 80px;
+	position: fixed;
+   }
 .seat {
   height: 40px;
   width: 40px;
   margin: 4px;
   background-color: #999999;
+  display: inline-block;
+  cursor: pointer;
+  border-radius: 2px;
+  font-size: 12px;
+}
+.seatbuy {
+  height: 40px;
+  width: 40px;
+  margin: 4px;
+  background-color: #000080;
+  display: inline-block;
+  cursor: pointer;
+  border-radius: 2px;
+  font-size: 12px;
+}
+.seatreserv {
+  height: 40px;
+  width: 40px;
+  margin: 4px;
+  background-color: #FFFF00;
   display: inline-block;
   cursor: pointer;
   border-radius: 2px;
@@ -38,56 +71,78 @@
   margin-right: 5px;
 }
     </style>
-    <script src="/scripts/snippet-javascript-console.min.js?v=1"></script>
+    {% endblock %}
 </head>
-<body>
+{% block main %}
+<body style="background-image:url( https://www.tokkoro.com/picsup/5777706-denim-wallpapers.jpg)">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
 <body>
   <div class='result'>
   </div>
   <div class='cinemaHall zal1'></div>
-
+<button id="idbuy">Купить </button>
+<button id="idreserv">Забронировать </button>
 </body>
     <script type="text/javascript">
-        // план зала по рядам общая вместительность 300 мест
-// планов может быть и больше... и разные...
 var cinemaHall1 = {
-  row: [5, 7, 9, 9, 9]
+  row: [5, 7, 9]
 };
+var typetick=1;
+var buylist=[{{buylist}}];
+var reslist=[{{reslist}}]
+var sizelist=Number({{sizelist}})
+var sizereslist=Number({{sizeres}})
+var k=0;
 var cinemaHallMap = '';
-// перебираем все ряды
+var listticketbuy="";
 for (var i = 0; i < cinemaHall1.row.length; i++) {
-  // запомнили номер ряда
   var rowNumber = i + 1;
-  // сколько мест в этом ряду
   var numberOfSeats = cinemaHall1.row[i];
   var cinemaHallRow = '';
-  // перебираем места в ряду
   for (var j = 0; j < numberOfSeats; j++) {
-    // запомнили номер текущего места
+	k++;
+	if(isbuy(k)&& isres(k)){
     var seatNumber = j + 1;
     cinemaHallRow += '<div class="seat" data-row="' +
       rowNumber + '" data-seat="' +
+      seatNumber + '" data-num="' +
+      k +'">' + seatNumber + '</div>';
+	  }
+	  else  if(!(isbuy(k))) {
+		var seatNumber = j + 1;
+    cinemaHallRow += '<div class="seatbuy" data-row="' +
+      rowNumber + '" data-seatbuy="' +
       seatNumber + '">' + seatNumber + '</div>';
+	  }
+	  else  if(!(isres(k))) {
+		var seatNumber = j + 1;
+    cinemaHallRow += '<div class="seatreserv" data-row="' +
+      rowNumber + '" data-seatreserv="' +
+      seatNumber + '">' + seatNumber + '</div>';
+	  }
   }
   cinemaHallMap += cinemaHallRow + '<div class="passageBetween">&nbsp;</div>';
 }
 
-//заполняем в html зал номер 1
+
+$('#idbuy').bind('click', settype);
+$('#idreserv').bind('click', settype1);
 $('.zal1').html(cinemaHallMap);
-// тут по клику определяем что место выкуплено
 $('.seat').on('click', function(e) {
-  // если первый раз кликнули билет выкупили, 
-  // если повторно значит вернули билет
+  if(!($(e.currentTarget).hasClass("bay")))
+  {
+	listticketbuy+=($(e.currentTarget).data().num+',');
+  }
+  else{
+	deletefromstr($(e.currentTarget).data().num);
+  }
   $(e.currentTarget).toggleClass('bay');
-  //показываем сколько билетов выкуплено
   showBaySeat();
 });
 
 function showBaySeat() {
   result = '';
-  //ищем все места купленные и показываем список выкупленных мест
   $.each($('.seat.bay'), function(key, item) {
     result += '<div class="ticket">Ряд: ' +
       $(item).data().row + ' Место:' +
@@ -96,6 +151,101 @@ function showBaySeat() {
 
   $('.result').html(result);
 }
+function isbuy(m)
+{
+	f=0;
+	for (t=0;t<sizelist;t++)
+	{
+		if (buylist[0][t]==m)
+			{f++;}
+	}
+	if (f==0) 
+	{return true}
+	else {return false}
+}
+function isres(d)
+{
+	r=0;
+	if(sizereslist==0)
+	{
+		if (reslist[0][0]==d)
+			{r++;}
+	}
+	for (y=0;y<sizereslist;y++)
+	{
+		if (reslist[0][y]==d)
+			{r++;}
+	}
+	if (r==0) 
+	{return true}
+	else {return false}
+}
+function deletefromstr(num)
+{
+	lennum=(num+'').length
+	newstr='';
+	if(listticketbuy.indexOf(num+'')!=-1)
+		{
+			for (t=0;t<listticketbuy.length;t++)
+			{
+				if(t==listticketbuy.indexOf(num+''))
+				{
+					t+=lennum
+				}
+				else{
+					newstr+=listticketbuy[t]
+				}
+			}
+		}
+		listticketbuy=newstr;
+}
+function postList() {
+  $.ajax({
+  
+        type: 'POST',
+        url: "http://127.0.0.1:8000/",
+        data: {
+            "listticketbuy": listticketbuy,
+			"nums":{{numses}},
+			"zal":{{zal}},
+			"type":typetick,
+			csrfmiddlewaretoken: getCookie('csrftoken'),
+        },
+        success:function() {
+            console.log("success");
+        },
+        error: function(data) {
+            console.log("error");
+        }
+    });
+	document.location.href = "/listsession/endbuy";
+}
+function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = jQuery.trim(cookies[i]);
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+function settype()
+{
+	typetick=1;
+	postList();
+}
+function settype1()
+{
+	typetick=2;
+	postList();
+}
     </script>
+	
 </body>
+{% endblock %}
 </html>

@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'menu.html' %}
 {% block head %}
 {% load static %}
 <title>{{film.namefilm}}</title>
@@ -10,7 +10,7 @@
   {% if not film %}
 	  <b>Фильм отсутствует</b>
 	  {% else %}
-		<img src="{{ film.imgurl}}" alt="Image" width="189" height="255">
+		<img id="imgo" src="{{ film.imgurl}}" alt="Image" width="189" height="255">
 		<p>{{ film.description}}</p>
 	{% endif %}
 {% endblock %}

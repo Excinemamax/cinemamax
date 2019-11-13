@@ -1,8 +1,16 @@
-{% extends 'base.html' %}
+{% extends 'menu.html' %}
 {% block head %}
 {% load static %}
 <title>Расписание</title>
-<link href="{% static 'css/style.css' %}" rel="stylesheet">
+<style>
+#imgo {
+	float:left;
+    width: 50px;
+    height: 50px;
+    display: block;
+}
+
+</style>
 {% endblock %}
  
 {% block main %}
@@ -13,13 +21,14 @@
 		{% for ses in listses %}
 			{% with ses|first as first_doc %}
 				<a href="/listfilms/{{ first_doc.first.fillname.namefilm }}"><b>{{first_doc.fillname.namefilm}}</b></a>
+				<img id="imgo" src="{{ first_doc.fillname.imgurl}}"  alt="Image">
 				<br><br>
 			{% endwith %}
 			{% for one in ses %}
-					<a href="/listsession/{{ one.numberhall.idhall }}/{{ one.idsession}}"><b>{{one.datasession }}</b></a>
+					<a id ="tekses" href="/listsession/{{ one.numberhall.idhall }}/{{ one.idsession}}"><b>{{one.datasession }}</b></a>
 					<br>
 			{% endfor %}
-			<br><br><br>
+			<br><br><br><br><br><br><br><br><br><br><br><br>
 		{% endfor %}
 	{% endif %}
 {% endblock %}

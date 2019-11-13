@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html>
 {% extends 'menu.html' %}
 <head>
@@ -10,18 +9,12 @@
   display: inline-block;
   vertical-align: top;
 }
-#idbuy {
+#idreserv {
 	float:middle; width:35%; margin-left:1%;
     top: 500px; 
     left: 100px;
 	position: fixed;
    }
-#idreserv {
-	float:middle; width:35%; margin-left:1%;
-    top: 540px; 
-    left: 100px;
-	position: fixed;
-}
 .seat {
   height: 40px;
   width: 40px;
@@ -72,7 +65,8 @@
   margin-right: 5px;
 }
     </style>
- {% endblock %}
+	 {% endblock %}
+    
 </head>
  {% block main %}
 <body style="background-image:url( https://www.tokkoro.com/picsup/5777706-denim-wallpapers.jpg)">
@@ -82,7 +76,6 @@
   <div class='result'>
   </div>
   <div class='cinemaHall zal1'></div>
-<button id="idbuy">Купить </button>
 <button id="idreserv">Забронировать </button>
 </body>
     <script type="text/javascript">
@@ -127,7 +120,6 @@ for (var i = 0; i < cinemaHall1.row.length; i++) {
 }
 
 
-$('#idbuy').bind('click', settype);
 $('#idreserv').bind('click', settype1);
 $('.zal1').html(cinemaHallMap);
 $('.seat').on('click', function(e) {

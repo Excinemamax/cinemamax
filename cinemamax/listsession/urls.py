@@ -8,4 +8,5 @@ urlpatterns = [
 	#url(r'^$', views.index, name='index'),
 	path('', views.index),
 	path('<int:idzal>/<int:numses>/', views.printzal),
+	url(r'^endbuy/$', views.endbuy, name='endbuy'),
 	]

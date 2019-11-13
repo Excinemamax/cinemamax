@@ -1,11 +1,46 @@
-{% extends "base.html" %}
-
+{% extends 'menu.html' %}
+{% block head %}
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<style>
+.form-content
+{
+    padding: 5%;
+    border: 1px solid #ced4da;
+    margin-bottom: 2%;
+	font-size:large;
+}
+.note
+{
+    text-align: center;
+    height: 80px;
+    background: -webkit-linear-gradient(left, #0072ff, #8811c5);
+    color: #fff;
+    line-height: 80px;
+}
+.btnSubmit
+{
+    border:none;
+    border-radius:1.5rem;
+    padding: 1%;
+    width: 20%;
+    cursor: pointer;
+    background: #0062cc;
+    color: #fff;
+}
+</style>
+{% endblock %}
 {% block main %}
-    <h1>Create an account</h1>
-    <p>Please, sign up using the following form:</p>
-    <form action="." method="post">
-        {{ user_form.as_p }}
-        {% csrf_token %}
-        <p><input type="submit" value="Create my account"></p>
-    </form>
+	<div class="note">
+		<h1>Регистрация</h1>
+		<p>Пожайлуста введите свои данные</p>
+	</div>
+	<div class="form-content">
+		<form action="." method="post">
+			{{ user_form.as_p }}
+			{% csrf_token %}
+			<p><input type="submit" class="btnSubmit" value="Создать аккаунт"></p>
+		</form>
+	</div>
 {% endblock %}
