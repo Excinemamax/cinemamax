@@ -10,8 +10,8 @@
  <h1> Выберете дату</h1>
   <form>
    <p> 
-   <input type="date" name="calendar" value="2019-11-11"
-    max="2019-11-17" min="2019-11-11">
+   <input type="date" name="calendar" value={{datenow}}
+    max="2019-11-29" min={{datenow}}>
    <input action="rasp/" type="submit" value="Показать"></p>
   </form>
   {% endblock %}

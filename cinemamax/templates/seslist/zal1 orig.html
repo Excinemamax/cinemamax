@@ -10,19 +10,16 @@
   display: inline-block;
   vertical-align: top;
 }
-.hide {
-        display: none;
-    }
 #idbuy {
-	float:middle; width:10%; margin-left:1%;
-    top: 160px; 
-    left: 600px;
+	float:middle; width:35%; margin-left:1%;
+    top: 500px; 
+    left: 100px;
 	position: fixed;
    }
 #idreserv {
-	float:middle; width:10%; margin-left:1%;
-    top: 190px; 
-    left: 600px;
+	float:middle; width:35%; margin-left:1%;
+    top: 540px; 
+    left: 100px;
 	position: fixed;
 }
 .seat {
@@ -89,33 +86,10 @@
 <button id="idreserv">Забронировать </button>
 </body>
     <script type="text/javascript">
-var numzal={{zal}}
-if (numzal==1)
-{
-	var cinemaHall1 = {
-	  row: [5, 7, 9, 9, 9, 9, 9]
-	};
-}
-else if (numzal==2)
-{
-	var cinemaHall1 = {
-  row: [5, 7, 9]
+var cinemaHall1 = {
+  row: [5, 7, 9, 9, 9, 9, 9]
 };
-}
-else if (numzal==3)
-{
-	var cinemaHall1 = {
-  row: [5, 7, 9, 9, 9, 9, 9, 10, 11]
-};
-}
 var typetick=1;
-var endbuy={{endbuy}}
-var isreserver={{isress}}
-if (isreserver==0)
-	hidebutres();
-var ishide={{isb}}
-if(ishide==0 || endbuy==0)
-{hidebutbuy()}
 var buylist=[{{buylist}}];
 var reslist=[{{reslist}}]
 var sizelist=Number({{sizelist}})
@@ -156,7 +130,6 @@ for (var i = 0; i < cinemaHall1.row.length; i++) {
 $('#idbuy').bind('click', settype);
 $('#idreserv').bind('click', settype1);
 $('.zal1').html(cinemaHallMap);
-if(endbuy!=0){
 $('.seat').on('click', function(e) {
   if(!($(e.currentTarget).hasClass("bay")))
   {
@@ -168,7 +141,7 @@ $('.seat').on('click', function(e) {
   $(e.currentTarget).toggleClass('bay');
   showBaySeat();
 });
-}
+
 function showBaySeat() {
   result = '';
   $.each($('.seat.bay'), function(key, item) {
@@ -271,14 +244,6 @@ function settype1()
 {
 	typetick=2;
 	postList();
-}
-function hidebutbuy()
-{
-	document.getElementById("idbuy").className = "hide"; 
-}
-function hidebutres()
-{
-	document.getElementById("idreserv").className = "hide"; 
 }
     </script>
 	

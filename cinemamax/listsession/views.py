@@ -6,7 +6,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth import authenticate
 import datetime
 from django.db.models import Count
-
+import time
 
 def index(request):
         if request.method == "POST":
@@ -40,15 +40,30 @@ def index(request):
                      x=Sessions.objects.select_related ('fillname')
                      for s in x:
                              print(s.fillname.imgurl)
-                     return render(request,"seslist/calendar.html",{"datenow":datetime.date.today()})
+                     return render(request,"seslist/calendar.html",{"datenow":datetime.datetime.now().strftime("%Y-%m-%d")})
 
 def printzal(request,idzal,numses):
         if request.user.is_authenticated:
                 if((Users.objects.get(uname=request.user.username).card)is None):
-                        zal="seslist/zalres"+str(idzal)
+                        isbuy=0
                 else:
-                        zal="seslist/zal"+str(idzal)
-                zal=zal+".html"
+                        isbuy=1
+                datetimeses=Sessions.objects.get(idsession=numses).datasession
+                isres=1
+                endbuy=1
+                print(datetime.datetime.now())
+                print(datetimeses)
+                deltatime=(datetimeses-datetime.datetime.now()).seconds/60
+                prosh=(datetime.datetime.now()-datetimeses).seconds/60
+                if (abs(deltatime)<=60 and datetime.datetime.now().day==datetimeses.day and datetime.datetime.now().month==datetimeses.month ):
+                        Buyticket.objects.filter(sessionid=numses,isbuy=False).delete()
+                        isres=0
+                if (abs(deltatime)<=30 and datetime.datetime.now().day==datetimeses.day and datetime.datetime.now().month==datetimeses.month):
+                        endbuy=0
+                if(datetime.datetime.now().day>datetimeses.day and datetime.datetime.now().month==datetimeses.month or ((datetime.datetime.now()-datetimeses).seconds/60 >0) and (datetime.datetime.now().day==datetimeses.day)):
+                        isres=0
+                        endbuy=0
+                
                 Select_numses=Buyticket.objects.filter(sessionid=numses,isbuy=True)
                 Select_numsesreserv=Buyticket.objects.filter(sessionid=numses,isbuy=False)
                 reslist=[]
@@ -61,7 +76,8 @@ def printzal(request,idzal,numses):
                 for i in Select_numsesreserv:
                         reslist.append(Seats.objects.get(idseats=i.seatid.idseats).num)
                         sizeres+=1
-                return render(request,zal,{"buylist":buylist,"sizelist":sizelist,"numses":numses,"zal":idzal,"reslist":reslist,"sizeres":sizeres})
+                #return render(request,zal,{"buylist":buylist,"sizelist":sizelist,"numses":numses,"zal":idzal,"reslist":reslist,"sizeres":sizeres})
+                return render(request,"seslist/zal1.html",{"buylist":buylist,"sizelist":sizelist,"numses":numses,"zal":idzal,"reslist":reslist,"sizeres":sizeres,"isb":isbuy,"isress":isres,"endbuy":endbuy})
         else:
                 return render(request,"seslist/logged_out.html")
 

@@ -9,10 +9,12 @@ from django.conf.urls.static import static
 def index(request):
     if request.method == "POST":
         typetick=request.POST.get("type")
-        if(typetick==1):
+        print(typetick,type(typetick))
+        if(typetick=="1"):
             typetick=True
         else:
             typetick=False
+        print("Куплено или",typetick)
         sid=Buyticket.objects.last().buyid+1
         un=request.user.username
         uid=Users.objects.get(uname=un).user_id
@@ -38,3 +40,5 @@ def index(request):
     else:
         return render(request,"base.html")
 
+def cont(request):
+    return render (request,"seslist/conts.htnl")

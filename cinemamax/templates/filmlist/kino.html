@@ -1,9 +1,14 @@
 {% extends 'menu.html' %}
-{% block head %}
 {% load static %}
 <title>{{film.namefilm}}</title>
-<link href="{% static 'css/style.css' %}" rel="stylesheet">
-{% endblock %}
+<style>
+#imgo {
+    width: 400px;
+    height: auto;
+    display: block;
+}
+
+</style>
  
 {% block main %}
   <h1>{{film.namefilm}}</h1>
@@ -11,6 +16,6 @@
 	  <b>Фильм отсутствует</b>
 	  {% else %}
 		<img id="imgo" src="{{ film.imgurl}}" alt="Image" width="189" height="255">
-		<p>{{ film.description}}</p>
+		<p style="font-size:18px;color:#000000">{{ film.description}}</p>
 	{% endif %}
 {% endblock %}
