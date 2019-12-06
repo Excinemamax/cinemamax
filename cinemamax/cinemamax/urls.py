@@ -8,6 +8,7 @@ urlpatterns = [
 	url(r'^listsession/', include('listsession.urls')),
     url(r'^admin/', admin.site.urls),
 	url(r'^$', views.index, name='index'),
+	url(r'^myticket/', views.myticket, name='myticket'),
 	url(r'^accounts/', include('accounts.urls')),
 	url(r'^listfilms/', include('listfilms.urls')),
 ] + static(settings.STATIC_URL, document_root=settings.STATICFILES_DIRS)

@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'bfp)1gdiy!k!0lai8h+0ei^_98i&_fcbxzs3gfsenbyv&+pth_'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = []
 
@@ -131,9 +131,3 @@ STATIC_ROOT = ''
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
-STATIC_ROOT=os.path.join(BASE_DIR,"staticfiles")
-STATICFILES_STORAGE="whitenoise.django.GzipManifestStaticFilesStorage"
-
-import dj_database_url
-db_from_env = dj_database_url.config(conn_max_age=500)
-DATABASES['default'].update(db_from_env)

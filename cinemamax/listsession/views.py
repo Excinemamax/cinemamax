@@ -54,16 +54,19 @@ def printzal(request,idzal,numses):
                 print(datetime.datetime.now())
                 print(datetimeses)
                 deltatime=(datetimeses-datetime.datetime.now()).seconds/60
+                print(datetime.datetime.now().hour)
+                print(datetimeses.hour)
+                print((datetime.datetime.now()-datetimeses).seconds/60 )
                 prosh=(datetime.datetime.now()-datetimeses).seconds/60
                 if (abs(deltatime)<=60 and datetime.datetime.now().day==datetimeses.day and datetime.datetime.now().month==datetimeses.month ):
                         Buyticket.objects.filter(sessionid=numses,isbuy=False).delete()
                         isres=0
                 if (abs(deltatime)<=30 and datetime.datetime.now().day==datetimeses.day and datetime.datetime.now().month==datetimeses.month):
                         endbuy=0
-                if(datetime.datetime.now().day>datetimeses.day and datetime.datetime.now().month==datetimeses.month or ((datetime.datetime.now()-datetimeses).seconds/60 >0) and (datetime.datetime.now().day==datetimeses.day)):
+                if(datetime.datetime.now().day>datetimeses.day and datetime.datetime.now().month==datetimeses.month or ((datetime.datetime.now()-datetimeses).seconds/60 >0) and (datetime.datetime.now().day==datetimeses.day) and ((datetime.datetime.now().hour-datetimeses.hour)>0)):
                         isres=0
                         endbuy=0
-                
+                        print("tut")
                 Select_numses=Buyticket.objects.filter(sessionid=numses,isbuy=True)
                 Select_numsesreserv=Buyticket.objects.filter(sessionid=numses,isbuy=False)
                 reslist=[]

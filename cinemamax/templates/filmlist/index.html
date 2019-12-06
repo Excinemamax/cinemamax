@@ -14,4 +14,15 @@
 			<br><br><br>
 		{% endfor %}
 	{% endif %}
+	<h1>Фильмы, которые уже прошли</h1>
+	{% if not film_lst %}
+	  <b>Фильмы не найдены</b>
+	  {% else %}
+		{% for film in film_not %}
+			<a style="font-size:24px;color:#4B0082;font-weight: 600" href="/listfilms/{{ film.namefilm }}"><b>{{film.namefilm}}</b></a>
+			<img id="imgo" src="{{ film.imgurl}}"  alt="Image">
+			<p style="font-size:18px;color:#000000">{{ film.description|truncatechars:70 }}</p>
+			<br><br><br>
+		{% endfor %}
+	{% endif %}
 {% endblock %}

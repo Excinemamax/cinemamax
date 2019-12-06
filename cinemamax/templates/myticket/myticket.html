@@ -1,0 +1,28 @@
+{% extends 'menu.html' %}
+{% load static %}
+<title>Билетики</title>
+<style>
+#imgo {
+    width: 40px;
+    height: auto;
+    display: block;
+}
+
+</style>
+ 
+{% block main %}
+  <h1>Мои билеты</h1>
+  {% if not tick %}
+	  <b>Билеты отсутствуют</b>
+	  {% else %}
+		{% for myticket,row,col in tick %}
+			<a><b>{{myticket.sessionid.fillname.namefilm}}</b></a>
+			<img id="imgo" src="{{ myticket.sessionid.fillname.imgurl}}"  alt="Image">
+			<p>Номер ряда:{{row}}</p>
+			<p>Номер места:{{col}}</p>
+			<p> Дата и время: {{myticket.sessionid.datasession}}
+			<p> Выкуплено: {{myticket.isbuy}} </p>
+			<br><br>
+		{% endfor %}
+	{% endif %}
+{% endblock %}
